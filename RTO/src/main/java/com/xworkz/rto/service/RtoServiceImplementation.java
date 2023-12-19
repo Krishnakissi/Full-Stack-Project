@@ -128,11 +128,13 @@ public class RtoServiceImplementation implements RtoService {
 			RtoEntity entity= repo.checkLogin(email, otp);
 			if (entity != null) {
 				RtoDto dto = new RtoDto();
+				dto.setAccountActiveOrInactive("active");
 				BeanUtils.copyProperties(entity, dto);
-				if (dto.getEmail().equalsIgnoreCase(email) && dto.getOtp().equals(otp)) {
+				if (dto.getEmail().equalsIgnoreCase(email) && dto.getOtp().equals(otp)) {					
 					System.out.println(dto);
 					return dto;
 				} else {
+					dto.setAccountActiveOrInactive("inactive");
 					System.out.println("Invalid email or otp");
 					return null;
 				}
@@ -245,6 +247,14 @@ public class RtoServiceImplementation implements RtoService {
 	public boolean updateOtpById(RtoDto rtoDto,String otp) {
 		rtoDto.setOtp(otp);
 		 boolean otpupdate= repo.updateOtpById(rtoDto);
+		return otpupdate;
+	}
+	
+	@Override
+	public boolean updateForgot(RtoDto rtoDto,String password,String ConfirmPassword) {
+		rtoDto.setPassword(password);
+		rtoDto.setConfirmPassword(ConfirmPassword);
+		 boolean otpupdate= repo.updateForgot(rtoDto, password, ConfirmPassword);
 		return otpupdate;
 	}
 }

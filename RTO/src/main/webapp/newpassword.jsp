@@ -34,11 +34,15 @@
 			</nav>
 <div class="container w-50 border border-dark border-5 mt-5">
  			
+		<form action="updatepassword" method="post">
+<div class="mb-3">
+				<label class="form-label">Email</label> <input type="text"
+					 name="email" class="form-control" required="required" >
+			</div>
 		
-
 			<div class="mb-3">
 				<label class="form-label">New Password</label> <input type="text"
-					 name="newPassword" class="form-control" required="required" >
+					 name="password" class="form-control" required="required" >
 			</div>
 			
 			
@@ -51,6 +55,7 @@
 			
 			</div>
 			<br>
+			</form>
 </body>
 <%@include file="footer.jsp" %>
 

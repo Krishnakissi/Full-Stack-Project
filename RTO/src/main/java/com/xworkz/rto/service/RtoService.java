@@ -27,6 +27,8 @@ public interface RtoService {
 	public boolean updateOtpById(RtoDto rtoDto,String otp);
 
 	public boolean updateById(int id) ;
+	public boolean updateForgot(RtoDto rtoDto,String password,String ConfirmPassword) ;
+
 
 
 }

@@ -19,9 +19,11 @@ import com.xworkz.rto.dto.UserDto;
 import com.xworkz.rto.mail.RtoMail;
 import com.xworkz.rto.service.RtoService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/")
-
+@Slf4j
 public class RtoController {
 	@Autowired
 	RtoService service;
@@ -30,12 +32,12 @@ public class RtoController {
 	RtoMail rtoMail;
 
 	public RtoController() {
-		System.out.println("this is RtoController");
+		log.info("this is RtoController");
 	}
 
 	@PostMapping("save")
 	public String onSave(@ModelAttribute RtoDto dto, Model model) {
-
+		log.debug("Dto is  {}",dto);
 		List<RtoDto> dto2 = service.findAll();
 		for (RtoDto rtodto : dto2) {
 			if (rtodto.getEmail().equalsIgnoreCase(dto.getEmail())) {
@@ -221,7 +223,7 @@ public class RtoController {
 	}
 
 	@GetMapping("updateOtp")
-	public String up(@RequestParam int id, Model model) {
+	public String update(@RequestParam int id, Model model) {
 		boolean update = service.updateById(id);
 		if (update == true) {
 			model.addAttribute("updateMessage", "Updated successfully");
@@ -296,7 +298,27 @@ public class RtoController {
 			}
 		}*/
 		
+	@PostMapping("updatepassword")
+	public String updatePassword(@RequestParam String email,
+			@RequestParam String password,@RequestParam String confirmPassword,Model model) {
+		RtoDto dto1=null;
 		
+		List<RtoDto> dtos=service.findAll();
+		for(RtoDto rtoDto1:dtos) {
+			if(rtoDto1.getEmail().equals(email)) {
+				dto1=rtoDto1;
+			}
+		}
+		if(dto1!=null) {
+			service.updateForgot(dto1, password, confirmPassword);
+			model.addAttribute("pass", "UpdatedPassword Successfully");
+		}else {
+			model.addAttribute("err", "Unsuccessfully");
+		}
+		return "newpassword";
+	}
+
+}
 
 	
-}
+

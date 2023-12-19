@@ -205,5 +205,23 @@ manager.getTransaction().commit();
 		return true;
 	}
 
+
+	@Override
+	public boolean updateForgot(RtoDto rtoDto, String password, String confirmPassword) {
+		EntityManager manager=factory.createEntityManager();
+		RtoEntity entity=new RtoEntity();
+		BeanUtils.copyProperties(rtoDto, entity);
+		manager.getTransaction().begin();
+		manager.merge(entity);
+		manager.getTransaction().commit();
+		manager.close();
+		return true;
+	}
+	
+	
+
+	
+	
+
 	
 }

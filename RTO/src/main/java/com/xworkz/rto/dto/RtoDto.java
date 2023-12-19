@@ -51,4 +51,7 @@ public class RtoDto {
 	private String status;
 	private String otp;
 
+	private String accountActiveOrInactive;
+	
+	private int loginAttempts;
 }

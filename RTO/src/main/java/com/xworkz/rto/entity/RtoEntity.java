@@ -64,5 +64,9 @@ public class RtoEntity {
 	@Column(name = "otp")
 	private String otp;
 
+	@Column(name="accountStatus")
+	private String accountActiveOrInactive;
 	
+	@Column(name = "loginAttempts")
+	private int loginAttempts;
 }

@@ -23,6 +23,8 @@ public boolean updateById(int id);
 public boolean updateOtpById(RtoDto rtoDto);
 public List<UserEntity> searchByUserState(String state) ;
 public boolean updateStatus(String applicationNumber) ;
+public boolean updateForgot(RtoDto rtoDto,String password,String confirmPassword) ;
+
 
 
 }

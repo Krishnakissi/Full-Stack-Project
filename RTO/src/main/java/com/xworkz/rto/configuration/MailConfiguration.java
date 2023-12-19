@@ -6,13 +6,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import com.mysql.cj.log.Log;
+
+import lombok.extern.slf4j.Slf4j;
+
 @Configuration
+@Slf4j
 public class MailConfiguration {
-	
+
+	public MailConfiguration() {
+		log.info("Running mail configuration");
+	}
+
 	public JavaMailSender getJavaMailSender() {
-		
-	
-		JavaMailSenderImpl mailSender=new JavaMailSenderImpl();
+
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
 
@@ -23,16 +31,13 @@ public class MailConfiguration {
 		props.put("mail.transport.protocol", "smtp");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-		
-		
+
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.debug", "true");
-		//  props.put("server.ssl.enabled-protocols ", "TLSv1.2");
+		// props.put("server.ssl.enabled-protocols ", "TLSv1.2");
 
 		return mailSender;
-		
 
-	
 	}
 
 }
